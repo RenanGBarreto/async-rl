@@ -41,7 +41,7 @@ flags.DEFINE_integer('summary_interval', 5,
 flags.DEFINE_integer('checkpoint_interval', 600,
                      'Checkpoint the model (i.e. save the parameters) every n '
                      'seconds (rounded up to statistics interval.')
-flags.DEFINE_boolean('show_training', True, 'If true, have gym render evironments during training')
+flags.DEFINE_boolean('show_training', False, 'If true, have gym render evironments during training')
 flags.DEFINE_boolean('testing', False, 'If true, run gym evaluation')
 flags.DEFINE_string('checkpoint_path', 'path/to/recent.ckpt', 'Path to recent checkpoint to use for evaluation')
 flags.DEFINE_string('eval_dir', '/tmp/', 'Directory to store gym evaluation')
@@ -314,18 +314,18 @@ def evaluation(session, graph_ops, saver):
 
 
 def main(_):
-  g = tf.Graph()
-  session = tf.Session(graph=g)
-  with g.as_default(), session.as_default():
-    K.set_session(session)
-    num_actions = get_num_actions()
-    graph_ops = build_graph(num_actions)
-    saver = tf.train.Saver()
+    g = tf.Graph()
+    session = tf.Session(graph=g)
+    with g.as_default(), session.as_default():
+        K.set_session(session)
+        num_actions = get_num_actions()
+        graph_ops = build_graph(num_actions)
+        saver = tf.train.Saver()
 
-    if FLAGS.testing:
-        evaluation(session, graph_ops, saver)
-    else:
-        train(session, graph_ops, num_actions, saver)
+        if FLAGS.testing:
+            evaluation(session, graph_ops, saver)
+        else:
+            train(session, graph_ops, num_actions, saver)
 
 if __name__ == "__main__":
     tf.app.run()
