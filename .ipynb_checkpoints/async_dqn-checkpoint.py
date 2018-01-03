@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-# python async_dqn.py --experiment breakout --testing True --eval_dir ./eval/ --checkpoint_path checkpoints/breakout.ckpt-4425600 --num_eval_episodes 100
-# python async_dqn.py --experiment breakout --game "Breakout-v0" --num_concurrent 8 --show_training False  --checkpoint_path checkpoints/breakout.ckpt-4425600 --summary_dir ./summaries --checkpoint_dir ./checkpoints
+# python async_dqn.py --experiment breakout --testing True --checkpoint_path checkpoints/breakout.ckpt-4425600 --num_eval_episodes 100
+# python async_dqn.py --experiment breakout --game "Breakout-v0" --num_concurrent 6 --show_training True  --summary_dir ./summaries --checkpoint_dir ./checkpoints
 import os
 
 os.environ["KERAS_BACKEND"] = "tensorflow"
