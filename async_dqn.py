@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 # python async_dqn.py --experiment breakout --testing True --eval_dir ./eval/ --checkpoint_path checkpoints/breakout.ckpt-4425600 --num_eval_episodes 100
-# python async_dqn.py --experiment breakout --game "Breakout-v0" --num_concurrent 8 --show_training False  --checkpoint_path checkpoints/breakout.ckpt-4425600 --summary_dir ./summaries --checkpoint_dir ./checkpoints
+# python async_dqn.py --experiment breakout --game "Breakout-v0" --num_concurrent 1
 import os
 
 os.environ["KERAS_BACKEND"] = "tensorflow"
@@ -36,18 +36,18 @@ flags.DEFINE_integer('target_network_update_frequency', 10000, 'Reset the target
 flags.DEFINE_float('learning_rate', 0.0001, 'Initial learning rate.')
 flags.DEFINE_float('gamma', 0.99, 'Reward discount rate.')
 flags.DEFINE_integer('anneal_epsilon_timesteps', 1000000, 'Number of timesteps to anneal epsilon.')
-flags.DEFINE_string('summary_dir', '/tmp/summaries', 'Directory for storing tensorboard summaries')
-flags.DEFINE_string('checkpoint_dir', '/tmp/checkpoints', 'Directory for storing model checkpoints')
+flags.DEFINE_string('summary_dir', './summaries', 'Directory for storing tensorboard summaries')
+flags.DEFINE_string('checkpoint_dir', './checkpoints', 'Directory for storing model checkpoints')
 flags.DEFINE_integer('summary_interval', 5,
                      'Save training summary to file every n seconds (rounded '
                      'up to statistics interval.')
 flags.DEFINE_integer('checkpoint_interval', 600,
                      'Checkpoint the model (i.e. save the parameters) every n '
                      'seconds (rounded up to statistics interval.')
-flags.DEFINE_boolean('show_training', False, 'If true, have gym render evironments during training')
+flags.DEFINE_boolean('show_training', True, 'If true, have gym render evironments during training')
 flags.DEFINE_boolean('testing', False, 'If true, run gym evaluation')
 flags.DEFINE_string('checkpoint_path', 'path/to/recent.ckpt', 'Path to recent checkpoint to use for evaluation')
-flags.DEFINE_string('eval_dir', '/tmp/', 'Directory to store gym evaluation')
+flags.DEFINE_string('eval_dir', './eval/', 'Directory to store gym evaluation')
 flags.DEFINE_integer('num_eval_episodes', 100, 'Number of episodes to run gym evaluation.')
 FLAGS = flags.FLAGS
 T = 0
